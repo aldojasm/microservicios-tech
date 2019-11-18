@@ -5,7 +5,12 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 public class ClienteEntity {
@@ -20,25 +25,36 @@ public class ClienteEntity {
 	@NotEmpty(message = "Ingrese un Apellido")
 	private String apellido;
 	
-	@NotEmpty(message = "Ingrese Edad")
+	@NotNull(message = "Ingrese Edad")
 	private Long edad;
 	
-	@NotEmpty(message = "Ingrese Fecha de Nacimiento")
+	@Temporal(TemporalType.DATE)
+	@JsonFormat(pattern="dd/MM/yyyy")
+	@NotNull(message = "Ingrese Fecha de Nacimiento")
 	private Date fechaNacimiento;
 	
-	public ClienteEntity(Long id, String nombre, String apellido, Long edad, Date fechaNacimiento){
+	@Temporal(TemporalType.DATE)
+	@JsonFormat(pattern="dd/MM/yyyy")
+	private Date fechaProbableMuerte;
+	
+	public ClienteEntity(){
+	}
+	
+	public ClienteEntity(Long id, String nombre, String apellido, Long edad, Date fechaNacimiento, Date fechaProbableMuerte){
 		this.id = id;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.edad = edad;
 		this.fechaNacimiento = fechaNacimiento;
+		this.fechaProbableMuerte = fechaProbableMuerte;
 	}
 	
-	public ClienteEntity(String nombre, String apellido, Long edad, Date fechaNacimiento){
+	public ClienteEntity(String nombre, String apellido, Long edad, Date fechaNacimiento, Date fechaProbableMuerte){
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.edad = edad;
 		this.fechaNacimiento = fechaNacimiento;
+		this.fechaProbableMuerte = fechaProbableMuerte;
 	}	
 	
 	public Long getId() {
@@ -70,6 +86,14 @@ public class ClienteEntity {
 	}
 	public void setFechaNacimiento(Date fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
+	}
+
+	public Date getFechaProbableMuerte() {
+		return fechaProbableMuerte;
+	}
+
+	public void setFechaProbableMuerte(Date fechaProbableMuerte) {
+		this.fechaProbableMuerte = fechaProbableMuerte;
 	}
 	
 }
