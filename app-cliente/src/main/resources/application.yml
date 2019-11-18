@@ -1,0 +1,50 @@
+server:
+  port: 8001
+  servlet:
+    context-path: /crearcliente
+
+spring:
+  application:
+    name: ServicioCrearCliente
+  profiles:
+    active: AmbienteDesarrollo  
+---
+
+spring:
+  profiles: AmbienteDesarrollo
+logging:
+  path: logs/dev
+  file: ${logging.path}/${spring.profiles}_profile_app.log
+  file.max-history: 5
+  file.max-size: 10MB
+  pattern:
+    console: "%d %-5level %logger : %msg%n"
+    file: "%d %-5level [%thread] %logger : %msg%n"
+  level:
+    root: INFO 
+    org.springframework.web: DEBUG
+    org.hibernate: DEBUG
+    org.hibernate.type: TRACE
+    
+---
+
+spring:
+  profiles: AmbienteProduccion
+logging:
+  path: logs/prod
+  file: ${logging.path}/${spring.profiles}_profile_app.log
+  file.max-history: 2
+  file.max-size: 1KB
+  pattern:
+    console: "%d %-5level %logger : %msg%n"
+    file: "%d %-5level [%thread] %logger : %msg%n"
+  level:
+    root: WARN 
+    org.springframework.web: WARN
+    org.hibernate: WARN
+---
+    
+eureka:
+  client:
+    service-url:
+          defaultZone: http://localhost:8761/eureka/
