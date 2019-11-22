@@ -47,4 +47,4 @@ logging:
 eureka:
   client:
     service-url:
-          defaultZone: http://localhost:8761/eureka/
+          defaultZone: https://eureka-server-tech.herokuapp.com/eureka/
