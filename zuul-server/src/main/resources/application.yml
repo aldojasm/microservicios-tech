@@ -10,7 +10,7 @@ spring:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka/      
+      defaultZone: https://eureka-server-tech.herokuapp.com/eureka/      
 zuul:
   routes:
     student-service:
