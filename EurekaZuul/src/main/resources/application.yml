@@ -1,0 +1,13 @@
+info:
+  component: zuul server app  
+server: 
+  port: 2020
+spring:
+  config:
+    name: zuul
+  application:
+    name: ZuulServer
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
